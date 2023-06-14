@@ -59,7 +59,7 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-        <a href="index.html" class="logo me-auto"><img src="public/images/pngegg.png" alt="" style="width: 100px; height: 80px"></a>
+        <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" style="width: 80px; height: 40px"></a>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
 
@@ -76,7 +76,10 @@
                 </li>
             </ul>
             @else
-                @if(auth()->user())
+                @if(auth()->user()->role_id == 3)
+                            <ul>
+                                <li><a class="nav-link scrollto " href="{{route('patient.home.view')}}">Home</a></li>
+                        </ul>
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
@@ -93,8 +96,49 @@
                             </form>
 
                         </div>
+                        @elseif(auth()->user()->role_id == 2)
+                                            <ul>
+                                                <li><a class="nav-link scrollto " href="{{route('doctor.view.profile')}}">Home</a></li>
+                                                </ul>
+                                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                    {{ Auth::user()->name }}
+                                                </a>
 
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                        {{ __('Logout') }}
+                                                    </a>
+
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                        @csrf
+                                                    </form>
+
+                                                </div>
+                                                @elseif(auth()->user()->role_id == 1)
+                                                    <ul>
+                                                            <li><a class="nav-link scrollto " href="{{route('admin.view.profile')}}">Home</a></li>
+                                                            </ul>
+                                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                                {{ Auth::user()->name }}
+                                                            </a>
+
+                                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                                    {{ __('Logout') }}
+                                                                </a>
+
+                                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                                    @csrf
+                                                                </form>
+
+                                                            </div>
                 @endif
+
+
             @endguest
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->

@@ -29,21 +29,42 @@
                             <div class="form-group">
                                 <label for="name">{{ __('Name') }}</label>
                                 <input id="name" type="text" class="form-control" name="name" value="{{ auth()->user()->name }}" required autofocus>
+                                @error('name')
+                                <p class="text text-danger">
+                                    {{ $message }}
+                                </p>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="email">{{ __('Email') }}</label>
                                 <input id="email" type="email" class="form-control" name="email" value="{{ auth()->user()->email }}" required>
+
+                                @error('email')
+                                <p class="text text-danger">
+                                    {{ $message }}
+                                </p>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="department">{{ __('Department') }}</label>
                                 <input id="department" type="text" class="form-control" name="department" value="{{ $doc->doctor->department }}" required>
+                                @error('department')
+                                <p class="text text-danger">
+                                    {{ $message }}
+                                </p>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="license_no">{{ __('License') }}</label>
                                 <input id="license_no" type="number" class="form-control" name="license_no" value="{{ $doc->doctor->license_no }}" required>
+                                @error('license_no')
+                                <p class="text text-danger">
+                                    {{ $message }}
+                                </p>
+                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark"

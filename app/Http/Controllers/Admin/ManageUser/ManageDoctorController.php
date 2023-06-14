@@ -75,7 +75,7 @@ class ManageDoctorController extends Controller
             return redirect()->route('admin.view.profile');
 
         }
-        return view('admin.profile.profileEdit', compact('admin'));
+        return view('superAdmin.profile.profileEdit', compact('admin'));
     }
 
     /**

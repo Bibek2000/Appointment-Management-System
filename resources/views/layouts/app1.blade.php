@@ -35,7 +35,10 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item" style="display: flex">
+                <a class="dropdown-item" href="{{route('main.home')}}">
+                    Home
+                </a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -62,8 +65,11 @@
         <div class="sidebar">
             <!-- Sidebar user (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="/public/images/default.jpeg" class="img-circle elevation-2" alt="User Image" style="border-radius: 100%; height: 40px">
+                </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{auth()->user()->name}}</a>
+                    <a href="{{route('admin.view.profile')}}" class="d-block">{{auth()->user()->name}}</a>
                 </div>
             </div>
 
@@ -77,10 +83,7 @@
                     <li class="nav-item">
                         <a href="" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <a><p>
                                 Dashboard
-                            </p>
-                            </a>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -141,6 +144,11 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <h1>@yield('Heading', 'Admin Dashboard')</h1>
+        @if($errors->any())
+            @foreach($errors as $error)
+                <p class="text-danger">{{$error}}</p>
+            @endforeach
+        @endif
         @yield('content')
     </div>
     <!-- /.content-wrapper -->

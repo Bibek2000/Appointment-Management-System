@@ -4,26 +4,26 @@
 <style>
     .gradient-custom {
         /* fallback for old browsers */
-        background: #f6d365;
+        background: #22A699;
 
         /* Chrome 10-25, Safari 5.1-6 */
-        background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+        background: -webkit-linear-gradient(to right bottom, #22A699, #7ED9C3);
 
         /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+        background: linear-gradient(to right bottom, #22A699, #7ED9C3);
     }
 </style>
     <section class="vh-100" style="background-color: #f4f5f7;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-6 mb-4 mb-lg-0">
-                    <div class="card mb-3" style="border-radius: .5rem;">
+                    <div class="card mb-3 shadow-lg" style="border-radius: .5rem;">
                         <div class="row g-0">
                             <div class="col-md-4 gradient-custom text-center text-white">
                                 @if($doc->doctor->image)
-                                    <img style="border-radius: 100%" src="{{ asset('storage/images/'.$doc->doctor->image) }}" alt="Avatar" class="my-5" width="110" height="110">
+                                    <img style="border-radius: 100%; width: 180px; height: 180px" src="{{ asset('storage/images/'.$doc->doctor->image) }}" alt="Avatar" class="my-5">
                                 @else
-                                    <img style="border-radius: 100%" src={{asset('public/images/default.jpeg')}} alt="Avatar" class="img-fluid my-5" style="width: 80px;">
+                                    <img style="border-radius: 100%; width: 180px; height: 180px" src={{asset('public/images/default.jpeg')}} alt="Avatar" class="img-fluid my-5">
                                 @endif
                                 <h5>{{$doc->name}}</h5>
                                 <p>{{$doc->doctor->department}}</p>
@@ -40,16 +40,25 @@
                                                 <div class="col-6 mb-3">
                                                     <h6>Appointment Date</h6>
                                                     <input type="date" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" required>
+                                                    @error('date')
+                                                    <p class="text text-danger">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-6 mb-3">
                                                     <h6>Appointment Time</h6>
                                                     <input type="time" name="time" class="form-control datepicker" id="date" placeholder="Appointment Time" required>
+                                                    @error('time')
+                                                    <p class="text text-danger">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <h6>Doctor</h6>
                                                 <select name="doctor_info" id="doctor" class="form-select">
-                                                    <option value="" disabled>Select Doctor</option>
                                                     <option value="{{$doc->doctor->id}}">{{$doc->name}}/{{$doc->doctor->department}}</option>
                                                 </select>
                                             </div>
@@ -74,4 +83,12 @@
             </div>
         </div>
     </section>
+<script>
+    var today = new Date().toISOString().split('T')[0];
+    var maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 10);
+    var maxDateFormatted = maxDate.toISOString().split('T')[0];
+    document.getElementById("date").setAttribute('min', today);
+    document.getElementById("date").setAttribute('max', maxDateFormatted);
+</script>
 @endsection

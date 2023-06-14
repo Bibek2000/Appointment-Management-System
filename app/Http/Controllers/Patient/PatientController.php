@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Patient;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PatientRequests;
 use App\Models\Backend\Appointment;
 use App\Models\Backend\Doctor;
 use App\Models\Backend\Patient;
@@ -19,7 +20,8 @@ class PatientController extends Controller
     public function index()
     {
         $doctor = User::with('doctor')->where('approved_status', 1)->get();
-        return view('patient.create', compact('doctor'));
+        $data = Appointment::with('doctor')->where('patient_id',auth()->user()->patient->id)->get();
+        return view('patient.create', compact('doctor', 'data'));
     }
 
     /**
@@ -33,7 +35,8 @@ class PatientController extends Controller
     }
     public function createAppointment(){
         $doctor = User::with('doctor')->where('approved_status', 1)->get();
-        return view('patient.create', compact('doctor'));
+        $data = Appointment::with('doctor')->where('patient_id',auth()->user()->patient->id)->get();
+        return view('patient.create', compact('doctor','data'));
     }
 
     /**
@@ -47,16 +50,16 @@ class PatientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
-    {
-        $data = Appointment::with('doctor')->where('patient_id',auth()->user()->patient->id)->get();
-        return view("patient.show", compact('data'));
-    }
+//    public function show()
+//    {
+//
+//        return view("patient.show", compact('data'));
+//    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $pat = User::with('patient')->find($id);
         if (!$pat) {
@@ -70,7 +73,7 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(PatientRequests $request)
     {
         $user = Auth::user();
         $patient = Patient::where('user_id',Auth::user()->id);

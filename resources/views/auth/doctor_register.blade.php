@@ -49,12 +49,12 @@
 
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-
-        <a href="/index.html" class="logo me-auto"><img src="/assets/img/12.jpeg" alt="" style="width: 80px; height: 80px"></a>
+    <div class="container d-flex align-items-center" style="display: flex; justify-content: space-between">
+        <a class="nav-link" href="{{route('main.home')}}"><img src="/assets/img/logo.png" alt="" style="width: 80px; height: 40px"></a>
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
+                <li><a class="nav-link scrollto " href="{{ route('login') }}">Login</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>

@@ -9,6 +9,7 @@ use App\Models\Backend\Doctor;
 use App\Models\Backend\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -17,7 +18,8 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $records = Appointment::get();
+        $doctor = Auth::user()->doctor->id;
+        $records = Appointment::where('doctor_id', $doctor)->get();
         return view("doctor.appointment.view",compact('records'));
     }
 
@@ -50,6 +52,12 @@ class AppointmentController extends Controller
         $appointment = Appointment::find($id);
         $appointment->status = !$appointment->status;
         $appointment->save();
+
+//        if($appointment->status == 1){
+//            $doctor = Auth::user()->doctor->id;
+//            $records = Appointment::where('doctor_id', $doctor)->get();
+//
+//        }
 
         return redirect()->back();
     }

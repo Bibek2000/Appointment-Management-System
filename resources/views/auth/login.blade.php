@@ -49,9 +49,9 @@
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
-        <div class="container d-flex align-items-center">
+        <div class="container d-flex align-items-center" style="display: flex; justify-content: space-between">
 
-            <a href="index.html" class="logo me-auto"><img src="public/images/pngegg.png" alt="" style="width: 80px; height: 80px"></a>
+            <a class="nav-link" href="#"><img src="/assets/img/logo.png" alt="" style="width: 80px; height: 50px"></a>
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
@@ -80,7 +80,7 @@
         <div class="container" >
             <div class="row justify-content-center">
                 <div class="col-lg-5">
-                    <h2 class="text-center mb-4">{{ __('Login') }}</h2>
+                    <h2 class="text-center mb-4">Login</h2>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

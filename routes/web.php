@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('main.home');
 Route::get('/home', function () {
     return redirect(route('patient.home.view'));
 });
@@ -45,9 +45,8 @@ Route::middleware('superAdmin')->group(function() {
 
 Route::middleware('patient')->group(function(){
     Route::post('appointment/save', [\App\Http\Controllers\Doctor\AppointmentController::class, 'store'])->name('appointment.save');
-    Route::get('/patient/appointment_show', [\App\Http\Controllers\Patient\PatientController::class, 'show'])->name('appointment.show');
     Route:: delete('appointment/delete/{id}', [\App\Http\Controllers\Patient\PatientController::class, 'destroy'])->name('appointments.destroy');
-    Route::get('/appointment/form', [\App\Http\Controllers\Patient\PatientController::class, 'createAppointment'])->name('appointment.form');
+    Route::get('/patient/form', [\App\Http\Controllers\Patient\PatientController::class, 'createAppointment'])->name('appointment.form');
     Route::get('/patient', [\App\Http\Controllers\Patient\PatientController::class, 'index'])->name('patient.home.view');
     Route::get('/patient/profile/view', [\App\Http\Controllers\Patient\PatientController::class, 'create'])->name('patient.view.profile');
     Route::get('/patient/profile/edit/{id}', [\App\Http\Controllers\Patient\PatientController::class, 'edit'])->name('patient.edit.profile');

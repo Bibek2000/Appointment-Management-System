@@ -26,7 +26,7 @@
                                     <img style="border-radius: 100%; width: 180px; height: 180px" src={{asset('public/images/default.jpeg')}} alt="Avatar" class="img-fluid my-5" >
                                 @endif
                                 <h5>{{$patient->user->name}}</h5>
-                                <a href="{{route('patient.edit.profile', $patient->user->id)}}"><i class="far fa-edit mb-5" style="color: blue"></i></a>
+                                <a href="{{route('patient.edit.profile', $patient->user->id)}}"><i class="far fa-edit mb-5" style="color: yellow"></i></a>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body p-4">

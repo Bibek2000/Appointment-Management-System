@@ -29,21 +29,22 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{url('/')}}" target="_blank" class="nav-link">Online Appointment System</a>
+                <a href="#" target="_blank" class="nav-link">Online Appointment System</a>
             </li>
         </ul>
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item" style="display: flex">
+                <a class="dropdown-item" href="{{route('main.home')}}">
+                    Home
+                </a>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}
                 </a>
-                <a class="dropdown-item" href="{{route('doctor.view.profile')}}">
-                    View Profile
-                </a>
+
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
@@ -65,11 +66,11 @@
         <div class="sidebar">
             <!-- Sidebar user (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-{{--                <div class="image">--}}
-{{--                    <img src="{{asset('assets/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">--}}
-{{--                </div>--}}
+                <div class="image">
+                    <img src="{{asset('storage/images/'.auth()->user()->doctor->image)}}" class="img-circle elevation-2" alt="User Image" style="border-radius: 100%; height: 40px">
+                </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{auth()->user()->name}}</a>
+                    <a href="{{route('doctor.view.profile')}}" class="d-block">{{auth()->user()->name}}</a>
                 </div>
             </div>
 
@@ -81,11 +82,10 @@
                          with font-awesome or any other icon font library -->
 
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
                                 Dashboard
-                            </p>
+                            </a>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -116,7 +116,12 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <h1>@yield('Heading')</h1>
+        <h1>@yield('Heading', 'Doctor Dashboard')</h1>
+        @if($errors->any())
+            @foreach($errors as $error)
+                <p class="text-danger">{{$error}}</p>
+            @endforeach
+        @endif
         @yield('content')
     </div>
     <!-- /.content-wrapper -->

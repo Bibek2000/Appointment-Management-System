@@ -40,10 +40,20 @@
                                                 <div class="col-6 mb-3">
                                                     <h6>Name</h6>
                                                     <input type="text" name="name" class="form-control" id="name" value="{{ auth()->user()->name }}">
+                                                    @error('name')
+                                                    <p class="text text-danger">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-6 mb-3">
                                                     <h6>Email</h6>
                                                     <input type="email" name="email" class="form-control" id="email" value="{{ auth()->user()->email }}" >
+                                                    @error('email')
+                                                    <p class="text text-danger">
+                                                        {{ $message }}
+                                                    </p>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-6 mb-3">

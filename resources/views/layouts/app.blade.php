@@ -44,12 +44,10 @@
 <div id="topbar" class="d-flex align-items-center fixed-top" style="background-color: #22A699">
     <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
         <div class="align-items-center d-none d-md-flex">
-
+            <i class="bi bi-clock"></i> AVAILABLE ALL WEEK
         </div>
         <div class="d-flex align-items-end" style="width: 40%; display: flex; flex-direction: row; justify-content: end">
-
             @if(auth()->user())
-
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" style="color: #f0f0f0">
@@ -74,16 +72,16 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-
-        <a href="index.html" class="logo me-auto"><img src="/public/images/pngegg.png" alt="" style="width: 80px; height: 80px"></a>
+            <a class="nav-link" href="#"><img src="/assets/img/logo.png" alt="" style="width: 80px; height: 50px"></a>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
-
+        <div style="width: 95%; display: flex; justify-content: flex-end">
         <nav id="navbar" class="navbar order-last order-lg-0">
-
-            <i class="bi bi-list mobile-nav-toggle"></i>
+<ul>
+            <li><a class="nav-link scrollto " href="{{route('patient.home.view')}}">Home</a></li>
+</ul>
         </nav><!-- .navbar -->
-
+        </div>
 
 
     </div>

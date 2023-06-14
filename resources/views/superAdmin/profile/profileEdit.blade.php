@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <form action="{{ route('patient.update.profile', $pat->id) }}" method="POST" id="regForm" enctype="multipart/form-data">
+    <form action="{{ route('admin.update.profile', $admin->id) }}" method="POST" id="regForm" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -14,37 +14,28 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="image">
-                                    @if($pat->image)
-                                        <img src="{{ asset('images/'.$pat->image) }}" alt="Student Image" height="100px" width="100">
-                                    @else
                                         <img src="{{ asset('images/default.jpeg') }}" alt="Image" height="50" width="50">
-                                    @endif
-                                    <p>Replace Image</p>
-                                    <div id="imagePreviewContainer" style="display: none;">
-                                        <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 200px; max-height: 200px;">
-                                    </div>
-                                    <input onchange="previewImage(this)" oninput="this.className = ''" name="image" type="file">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="name">{{ __('Name') }}</label>
                                 <input id="name" type="text" class="form-control" name="name" value="{{ auth()->user()->name }}" required autofocus>
+                                @error('name')
+                                <p class="text text-danger">
+                                    {{ $message }}
+                                </p>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="email">{{ __('Email') }}</label>
                                 <input id="email" type="email" class="form-control" name="email" value="{{ auth()->user()->email }}" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="department">{{ __('Department') }}</label>
-                                <input id="department" type="text" class="form-control" name="department" value="{{ $pat->doctor->department }}" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="license_no">{{ __('License') }}</label>
-                                <input id="license_no" type="number" class="form-control" name="license_no" value="{{ $pat->doctor->license_no }}" required>
+                                @error('email')
+                                <p class="text text-danger">
+                                    {{ $message }}
+                                </p>
+                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-success"><i class="fa fa-edit"></i> Update</button>
