@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Backend\Appointment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -9,20 +10,19 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class Mail extends Mailable
+class AppointmentStatusChanged extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $password;
+    public $appointment;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($password)
+    public function __construct($appointment)
     {
-        $this->password = $password;
+        $this->appointment = $appointment;
     }
-
-
 
     /**
      * Get the message envelope.
@@ -30,7 +30,7 @@ class Mail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Mail',
+            subject: 'Appointment Details',
         );
     }
 
@@ -40,7 +40,7 @@ class Mail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mailer.mail',
+            view: 'mailer.appointmentmail',
         );
     }
 

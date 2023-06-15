@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AppointmentRequests;
+use App\Mail\AppointmentStatusChanged;
 use App\Models\Backend\Appointment;
 use App\Models\Backend\Doctor;
 use App\Models\Backend\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail as Mymail;
 
 class AppointmentController extends Controller
 {
@@ -53,11 +55,11 @@ class AppointmentController extends Controller
         $appointment->status = !$appointment->status;
         $appointment->save();
 
-//        if($appointment->status == 1){
-//            $doctor = Auth::user()->doctor->id;
-//            $records = Appointment::where('doctor_id', $doctor)->get();
-//
-//        }
+        if($appointment->status == 1){
+            $patientemail = $appointment->patient->user->email;
+            $doctorname = $appointment->doctor->user->name;
+            Mymail::to($patientemail)->send(new AppointmentStatusChanged($doctorname));
+        }
 
         return redirect()->back();
     }
